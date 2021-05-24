@@ -1,25 +1,17 @@
 package trello
 
 import (
-	"flag"
-	"os"
 	"testing"
 )
 
-var baseUrl string
-func init() {
-    flag.StringVar(&baseUrl, "url", "", "API base URL")
-}
-
-func TestMain(m *testing.M) {
-    flag.Parse()
-    os.Exit(m.Run())
-}
-
 func TestGetLists(t *testing.T) {
+	if baseUrl == "" {
+		t.Fatalf("-url flag should be set to API url")
+	}
+
 	lists, err := GetLists(baseUrl)
 	if err != nil {
-		t.Errorf("got err %w, want no error", err)
+		t.Errorf("GetLists() = got err %w, want no error", err)
 	}
 
 	switch {
@@ -39,5 +31,6 @@ func TestGetLists(t *testing.T) {
 	}
 }
 
+// TODO: Errors should be handled properly
 func TestGetListsWithError(t *testing.T) {
 }
