@@ -12,7 +12,9 @@ type List struct {
 	Closed   bool
 }
 
-func GetLists(baseUrl string, boardId string) ([]*List, error) {
+type ListSlice []*List
+
+func GetLists(baseUrl string, boardId string) (ListSlice, error) {
 	res, err := http.Get(baseUrl + "/boards/" + boardId + "/lists")
 	if err != nil {
 		return nil, fmt.Errorf("trello: %w", err)
@@ -24,8 +26,16 @@ func GetLists(baseUrl string, boardId string) ([]*List, error) {
 		return nil, fmt.Errorf("trello: %w", err)
 	}
 
-	var lists []*List
-	err = json.Unmarshal(listsJson, &lists)
+    lists, err := Lists(listsJson)
+	return lists, err
+}
+
+func Lists(data []byte) (ListSlice, error) {
+	var lists ListSlice
+    err := json.Unmarshal(data, &lists)
+    if err != nil {
+        return lists, err
+    }
 
 	return lists, nil
 }

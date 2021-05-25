@@ -12,7 +12,9 @@ type Card struct {
 	Closed         bool
 }
 
-func GetCards(baseUrl string, listId string) ([]*Card, error) {
+type CardSlice []*Card
+
+func GetCards(baseUrl string, listId string) (CardSlice, error) {
 	res, err := http.Get(baseUrl + "/lists/" + listId + "/cards")
 	if err != nil {
 		return nil, fmt.Errorf("trello: %w", err)
@@ -24,7 +26,7 @@ func GetCards(baseUrl string, listId string) ([]*Card, error) {
 		return nil, fmt.Errorf("trello: %w", err)
 	}
 
-	var cards []*Card
+	var cards CardSlice
 	err = json.Unmarshal(cardsJson, &cards)
 
 	return cards, nil

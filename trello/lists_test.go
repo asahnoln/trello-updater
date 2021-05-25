@@ -21,7 +21,9 @@ func listsForTests(t *testing.T) []*List {
 }
 
 func TestGetLists(t *testing.T) {
-	checkFlags(t)
+	if !checkFlags(t) {
+        t.Skipf("won't test http api without flags.")
+    }
 
 	lists := listsForTests(t)
 
@@ -33,6 +35,9 @@ func TestGetLists(t *testing.T) {
 			t.Errorf("l.Name = \"\", want non-zero value")
 		}
 	}
+}
+
+func TestLists(t *testing.T) {
 }
 
 // TODO: Errors should be handled properly

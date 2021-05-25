@@ -19,11 +19,15 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func checkFlags(t *testing.T) {
-	if baseUrl == "" {
-		t.Fatalf("-url flag should be set to API url")
-	}
-	if boardId == "" {
-		t.Fatalf("-boardId flag should be set to board ID")
-	}
+func checkFlags(t *testing.T) bool {
+    switch {
+    case baseUrl == "":
+		t.Logf("-url flag is not set")
+        return false
+    case boardId == "":
+		t.Logf("-boardId flag is not set")
+        return false
+    }
+
+    return true
 }
