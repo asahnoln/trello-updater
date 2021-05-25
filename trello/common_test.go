@@ -7,14 +7,23 @@ import (
 )
 
 var baseUrl string
-var boardId int
+var boardId string
 
 func init() {
 	flag.StringVar(&baseUrl, "url", "", "API base URL")
-	flag.IntVar(&boardId, "boardId", 0, "API board ID")
+	flag.StringVar(&boardId, "boardId", "", "API board ID")
 }
 
 func TestMain(m *testing.M) {
 	flag.Parse()
 	os.Exit(m.Run())
+}
+
+func checkFlags(t *testing.T) {
+	if baseUrl == "" {
+		t.Fatalf("-url flag should be set to API url")
+	}
+	if boardId == "" {
+		t.Fatalf("-boardId flag should be set to board ID")
+	}
 }

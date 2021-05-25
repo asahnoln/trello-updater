@@ -5,17 +5,15 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"strconv"
 )
 
 type List struct {
-	Id     int `json:",string"`
-	Name   string
+	Id, Name string
 	Closed bool
 }
 
-func GetLists(baseUrl string, boardId int) ([]*List, error) {
-	res, err := http.Get(baseUrl + "/boards/" + strconv.Itoa(boardId) + "/lists")
+func GetLists(baseUrl string, boardId string) ([]*List, error) {
+	res, err := http.Get(baseUrl + "/boards/" + boardId + "/lists")
 	if err != nil {
 		return nil, fmt.Errorf("trello: %w", err)
 	}

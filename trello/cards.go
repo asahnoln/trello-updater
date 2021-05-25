@@ -5,17 +5,15 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"strconv"
 )
 
 type Card struct {
-	Id         int `json:",string"`
-	Name, Desc string
+	Id, Name, Desc string
 	Closed     bool
 }
 
-func GetCards(baseUrl string, listId int) ([]*Card, error) {
-	res, err := http.Get(baseUrl + "/lists/" + strconv.Itoa(listId) + "/cards")
+func GetCards(baseUrl string, listId string) ([]*Card, error) {
+	res, err := http.Get(baseUrl + "/lists/" + listId + "/cards")
 	if err != nil {
 		return nil, fmt.Errorf("trello: %w", err)
 	}

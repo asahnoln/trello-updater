@@ -4,14 +4,7 @@ import (
 	"testing"
 )
 
-func TestGetLists(t *testing.T) {
-	if baseUrl == "" {
-		t.Fatalf("-url flag should be set to API url")
-	}
-	if boardId == 0 {
-		t.Fatalf("-boardId flag should be set to board ID")
-	}
-
+func listsForTests(t *testing.T) []*List {
 	lists, err := GetLists(baseUrl, boardId)
 	if err != nil {
 		t.Errorf("GetLists() = got err %w, want no error", err)
@@ -19,15 +12,23 @@ func TestGetLists(t *testing.T) {
 
 	switch {
 	case lists == nil:
-		t.Errorf("GetLists() = nil, want slice")
+		t.Fatalf("GetLists() = nil, want slice")
 	case len(lists) == 0:
-		t.Errorf("GetLists() = 0, want more than 0")
+		t.Fatalf("GetLists() = 0, want more than 0")
 	}
+
+    return lists
+}
+
+func TestGetLists(t *testing.T) {
+    checkFlags(t)
+
+    lists := listsForTests(t)
 
 	for _, l := range lists {
 		switch {
-		case l.Id == 0:
-			t.Errorf("l.Id = 0, want non-zero value")
+		case l.Id == "":
+			t.Errorf("l.Id = \"\", want non-zero value")
 		case l.Name == "":
 			t.Errorf("l.Name = \"\", want non-zero value")
 		}

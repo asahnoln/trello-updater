@@ -5,17 +5,9 @@ import (
 )
 
 func TestGetCards(t *testing.T) {
-	if baseUrl == "" {
-		t.Fatalf("-url flag should be set to API url")
-	}
-	if boardId == 0 {
-		t.Fatalf("-boardId flag should be set to board ID")
-	}
+    checkFlags(t)
 
-	lists, err := GetLists(baseUrl, boardId)
-	if err != nil {
-		t.Errorf("GetLists() = got err %w, want no error", err)
-	}
+    lists := listsForTests(t)
 	cards, err := GetCards(baseUrl, lists[0].Id)
 	if err != nil {
 		t.Errorf("GetCards() = got err %w, want no error", err)
@@ -30,8 +22,8 @@ func TestGetCards(t *testing.T) {
 
 	for _, c := range cards {
 		switch {
-		case c.Id == 0:
-			t.Errorf("c.Id = 0, want non-zero value")
+		case c.Id == "":
+			t.Errorf("c.Id = \"\", want non-zero value")
 		case c.Name == "":
 			t.Errorf("c.Name = \"\", want non-zero value")
 		case c.Desc == "":

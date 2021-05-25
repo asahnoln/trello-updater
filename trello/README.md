@@ -6,18 +6,20 @@ This package presents types and functions to work with lists and cards.
 
 Required flags for testing:
 
-Option | Description
------: | :----------
-`-url` | url pointing to Trello API or other mock API, so that tests are run against it.
-`-boardId` | board ID in Trello or mock API to get lists and cards from.
+Option | Type | Description
+-----: | :--- | :----------
+`-url` | string | url pointing to Trello API or other mock API, so that tests are run against it.
+`-boardId` | string | board ID in Trello or mock API to get lists and cards from. It should be string as trello ids are string.
 
 Example:
 
-`go test -url "https://mymockapi.test/api/1"`
+`go test -url "https://mymockapi.test/api/1" -boardId "1"`
 
 ### Work with mock API
 
 In mock API, you have to create next endpoints:
 
-`/boards/:boardId/lists` - get lists from the given board
-`/lists/:listId/cards` - get cards from the given list
+Endpoint | Description
+-------: | :----------
+`/boards/:boardId/lists` | Get lists from the given board
+`/lists/:listId/cards` | Get cards from the given list
