@@ -9,7 +9,7 @@ import (
 
 type Card struct {
 	Id, Name, Desc string
-	Closed     bool
+	Closed         bool
 }
 
 func GetCards(baseUrl string, listId string) ([]*Card, error) {

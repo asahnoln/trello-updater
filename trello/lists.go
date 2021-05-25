@@ -9,7 +9,7 @@ import (
 
 type List struct {
 	Id, Name string
-	Closed bool
+	Closed   bool
 }
 
 func GetLists(baseUrl string, boardId string) ([]*List, error) {

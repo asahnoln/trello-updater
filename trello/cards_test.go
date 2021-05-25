@@ -5,9 +5,9 @@ import (
 )
 
 func TestGetCards(t *testing.T) {
-    checkFlags(t)
+	checkFlags(t)
 
-    lists := listsForTests(t)
+	lists := listsForTests(t)
 	cards, err := GetCards(baseUrl, lists[0].Id)
 	if err != nil {
 		t.Errorf("GetCards() = got err %w, want no error", err)

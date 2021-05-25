@@ -17,13 +17,13 @@ func listsForTests(t *testing.T) []*List {
 		t.Fatalf("GetLists() = 0, want more than 0")
 	}
 
-    return lists
+	return lists
 }
 
 func TestGetLists(t *testing.T) {
-    checkFlags(t)
+	checkFlags(t)
 
-    lists := listsForTests(t)
+	lists := listsForTests(t)
 
 	for _, l := range lists {
 		switch {
