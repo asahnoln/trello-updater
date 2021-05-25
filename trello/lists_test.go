@@ -8,8 +8,11 @@ func TestGetLists(t *testing.T) {
 	if baseUrl == "" {
 		t.Fatalf("-url flag should be set to API url")
 	}
+	if boardId == 0 {
+		t.Fatalf("-boardId flag should be set to board ID")
+	}
 
-	lists, err := GetLists(baseUrl)
+	lists, err := GetLists(baseUrl, boardId)
 	if err != nil {
 		t.Errorf("GetLists() = got err %w, want no error", err)
 	}
