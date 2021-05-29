@@ -26,16 +26,16 @@ func TestMain(m *testing.M) {
 
 func checkFlags(t *testing.T) {
 	switch {
-    case mdUrl == "":
+	case mdUrl == "":
 		t.Fatalf("-mdUrl flag should be set to markdown repository url")
-    case trelloUrl == "":
+	case trelloUrl == "":
 		t.Fatalf("-trelloUrl flag should be set to API url")
-    case boardId == "":
+	case boardId == "":
 		t.Fatalf("-boardId flag should be set to trello board ID")
 	}
 }
 
 func TestCreateData(t *testing.T) {
-    mdReader := markdown.Parse(mdUrl)
-    trello.Update(trelloUrl, boardId, mdReader)
+	mdReader := markdown.Parse(mdUrl)
+	trello.Update(trelloUrl, boardId, mdReader)
 }
