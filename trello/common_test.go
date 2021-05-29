@@ -20,10 +20,10 @@ func TestMain(m *testing.M) {
 }
 
 func checkFlags(t *testing.T) {
-	if baseUrl == "" {
+    switch {
+    case baseUrl == "":
 		t.Fatalf("-url flag should be set to API url")
-	}
-	if boardId == "" {
+    case boardId == "":
 		t.Fatalf("-boardId flag should be set to board ID")
-	}
+    }
 }
